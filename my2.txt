@@ -1,0 +1,163 @@
+animations
+
+<style>
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .messages p {
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .form button {
+        transition: transform 0.2s, background-color 0.2s;
+    }
+
+    .form button:hover {
+        transform: scale(1.05);
+        background-color: #45a049;
+    }
+</style>
+
+
+
+web3.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="web3.xsl"?>
+
+<students>
+    <student>
+        <name>John Doe</name>
+        <gender>Male</gender>
+        <email>john.doe@gmail.com</email>
+    </student>
+    <student>
+        <name>Jane Smith</name>
+        <gender>Female</gender>
+        <email>jane.smith@yahoo.com</email>
+    </student>
+    <student>
+        <name>Mike Brown</name>
+        <gender>Male</gender>
+        <email>mike.brown@hotmail.com</email>
+    </student>
+</students>
+
+
+
+
+web3.xsl
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:output method="html" encoding="UTF-8"/>
+
+    <xsl:template match="/">
+        <html>
+            <head>
+                <title>Student Registration Details</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        background-color: #f9f9f9;
+                        margin: 20px;
+                    }
+                    h2 {
+                        text-align: center;
+                        color: #333;
+                    }
+                    table {
+                        width: 80%;
+                        margin: 0 auto;
+                        border-collapse: collapse;
+                    }
+                    th, td {
+                        border: 1px solid #ccc;
+                        text-align: left;
+                        padding: 10px;
+                    }
+                    th {
+                        background-color: #f4f4f4;
+                        color: #333;
+                    }
+                    tr:nth-child(even) {
+                        background-color: #f9f9f9;
+                    }
+                </style>
+            </head>
+            <body>
+                <h2>Student Registration Details</h2>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>Email</th>
+                    </tr>
+                    <xsl:for-each select="students/student">
+                        <xsl:sort select="name" order="ascending"/>
+                        <tr>
+                            <td><xsl:value-of select="name"/></td>
+                            <td>
+                                <xsl:choose>
+                                    <xsl:when test="gender='Male'">Mr. <xsl:value-of select="gender"/></xsl:when>
+                                    <xsl:otherwise>Ms. <xsl:value-of select="gender"/></xsl:otherwise>
+                                </xsl:choose>
+                            </td>
+                            <td><xsl:value-of select="email"/></td>
+                        </tr>
+                    </xsl:for-each>
+                </table>
+            </body>
+        </html>
+    </xsl:template>
+</xsl:stylesheet>
+
+
+
+
+
+
+python -m http.server
+
+
+
+npm install -g http-server
+http-server .
+
+students.xsd
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <!-- Root Element -->
+    <xs:element name="students">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="student" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="name" type="xs:string"/>
+                            <xs:element name="gender">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="Male"/>
+                                        <xs:enumeration value="Female"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="email" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
+
